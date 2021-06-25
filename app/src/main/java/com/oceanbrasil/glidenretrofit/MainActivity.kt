@@ -37,7 +37,10 @@ class MainActivity : AppCompatActivity() {
                     call: Call<List<Repo?>?>,
                     response: Response<List<Repo?>?>
                 ) {
-                    TODO("Not yet implemented")
+                    val body = response.body()
+                    body?.get(0).let {
+                        Glide.with(this@MainActivity).load(it?.owner?.avatar_url).into(ivAvatar)
+                    }
                 }
 
                 override fun onFailure(call: Call<List<Repo?>?>, t: Throwable) {
